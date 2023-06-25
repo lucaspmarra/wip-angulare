@@ -30,6 +30,7 @@ const isErrored = computed(() => postStore.error);
           <header>
             <h4>{{ selectedTitle }}</h4>
           </header>
+
           <section v-if="isErrored">
             {{ isErrored }}
           </section>
@@ -61,7 +62,6 @@ const isErrored = computed(() => postStore.error);
   </Teleport>
 </template>
 <style scoped lang='scss'>
-
 .modal {
     position: fixed;
     z-index: 9998;
@@ -111,17 +111,17 @@ const isErrored = computed(() => postStore.error);
 .modal.custom-fade {
     opacity: 0;
     animation: fadeIn 0.5s ease-in-out forwards;
-  }
-  
-  @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     from {
-      opacity: 0;
-      transform: translateY(-50px);
+        opacity: 0;
+        transform: translateY(-50px);
     }
-  
+
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
+}
 </style>

@@ -14,22 +14,21 @@ fetchPosts();
 
 const showSelectedModel = ref(false);
 
-function handleSelect(id) {
+function handleSelect (id) {
   showSelectedModel.value = true;
 
   const { fetchPost } = usePostStore();
   fetchPost(id);
 }
 
-function handleClose() {
+function handleClose () {
   showSelectedModel.value = false;
 }
 
 </script>
 
 <template>
-  <main class="container">
-    <h1>Home view</h1>
+  <main>
     <PostModal
       :button-text="'launch posts modal'"
       :modal-title="'posts list'"

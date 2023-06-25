@@ -95,6 +95,12 @@ defineEmits('select-post');
   }
 }
 
+.modal__button {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
 .modal__custom {
   :hover {
     cursor: pointer;
