@@ -60,12 +60,12 @@ defineEmits('select-post');
               v-for="post in posts"
               :key="post.id">
               <span
-                class="modal__click"
+                class="modal__custom"
                 @click="$emit('select-post', post.id)">
-                <h4>
+                <h4 class="modal__custom__title">
                   {{ post.title }}
                 </h4>
-                <p>{{ post.body }}</p>
+                <p class="modal__custom__content">{{ post.body }}</p>
                 <p>user id: {{ post.userId }}</p>
                 <hr>
               </span>
@@ -88,10 +88,22 @@ defineEmits('select-post');
 <style scoped lang="scss">
 .modal {
 
-  &__click {
+  .modal-title {
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+}
 
-    :hover {
-      cursor: pointer;
+.modal__custom {
+  :hover {
+    cursor: pointer;
+  }
+
+  &__title,
+  &__content {
+    &::first-letter {
+      text-transform: capitalize;
     }
   }
 }
