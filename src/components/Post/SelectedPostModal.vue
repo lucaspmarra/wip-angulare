@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits } from 'vue';
+import { computed } from 'vue';
 import { usePostStore } from '@/stores/post';
 
 const props = defineProps({
