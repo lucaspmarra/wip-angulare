@@ -5,8 +5,8 @@ export const useRegisterStore = defineStore('register', {
     userName: '',
     userEmail: '',
     userDOB: null,
-    userGender: [],
-    userShirt: [],
+    userGender: ['male', 'female'],
+    userShirt: ['male t-shirt', 'femalte t-shirt'],
   }),
   
 });
