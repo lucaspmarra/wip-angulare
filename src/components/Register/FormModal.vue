@@ -1,17 +1,43 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, useStore } from 'vue';
+import { useRegisterStore } from '@/stores/register.js';
 
 defineProps(['buttonTitle', 'modalTitle']);
 
 const state = reactive({
   name: '',
-  email:'',
+  email: '',
   dob: '',
   phone: '',
   gender: '',
   shirt: ''
 });
+
+function handleRegister(event) {
+  event.preventDefault();
+
+  const data = {
+    name: state.name,
+    email: state.email,
+    dob: state.dob,
+    phone: state.phone,
+    gender: state.gender,
+    shirt: state.shirt
+  };
+
+  const registerStore = useStore(useRegisterStore);
+  registerStore.saveUserData(data);
+
+  state.name = '';
+  state.email = '';
+  state.dob = '';
+  state.phone = '';
+  state.gender = '';
+  state.shirt = '';
+}
 </script>
+
+
 
 <template>
   <!-- Button trigger modal -->
@@ -46,7 +72,7 @@ const state = reactive({
         </div>
 
         <div class="modal-body">
-          <form>
+          <form @submit.prevent="handleRegister">
             <div class="mb-3">
               <label
                 for="nameInput"
@@ -57,7 +83,7 @@ const state = reactive({
                 class="form-control"
                 id="nameInput">
             </div>
-
+            
             <div class="mb-3">
               <label
                 for="emailInput"
@@ -68,7 +94,7 @@ const state = reactive({
                 class="form-control"
                 id="emailInput">
             </div>
-
+            
             <div class="mb-3">
               <label
                 for="dobInput"
@@ -80,7 +106,7 @@ const state = reactive({
                 id="dobInput"
                 placeholder="DD/MM/YYYY">
             </div>
-
+            
             <div class="mb-3">
               <label
                 for="phoneInput"
@@ -92,7 +118,7 @@ const state = reactive({
                 id="phoneInput"
                 placeholder="(99) 99999-9999">
             </div>
-
+            
             <div class="mb-3">
               <label
                 for="genderSelect"
@@ -115,7 +141,7 @@ const state = reactive({
                 </option>
               </select>
             </div>
-
+            
             <div
               class="mb-3"
               v-if="state.gender === 'Male' || state.gender === 'Female'">
@@ -144,78 +170,20 @@ const state = reactive({
                 </option>
               </select>
             </div>
-
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal">
-              Submit
-            </button>
-
-            <!-- Modal -->
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5
-                      class="modal-title"
-                      id="exampleModalLabel">
-                      Form Values
-                    </h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close" />
-                  </div>
-                  <div class="modal-body">
-                    <p><strong>Full Name:</strong> {{ state.name }}</p>
-                    <p><strong>Email:</strong> {{ state.email }}</p>
-                    <p><strong>Date of Birth:</strong> {{ state.dob }}</p>
-                    <p><strong>Phone:</strong> {{ state.phone }}</p>
-                    <p><strong>Gender:</strong> {{ state.gender }}</p>
-                    <p><strong>T-Shirt:</strong> {{ state.shirt }}</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal">
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal">
+                Close
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary">
+                Register
+              </button>
             </div>
-
-              
-              
-            <button
-              type="submit"
-              class="btn btn-primary">
-              Submit
-            </button>
           </form>
-        </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal">
-            Close
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary">
-            Save changes
-          </button>
         </div>
       </div>
     </div>
