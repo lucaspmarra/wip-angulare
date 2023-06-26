@@ -6,7 +6,6 @@ export const usePostStore = defineStore({
   state: () => ({
     posts: [],
     post: null,
-    selectedPost: null,
     loading: false,
     error: null,
   }),
@@ -26,11 +25,11 @@ export const usePostStore = defineStore({
       }
     },
     async fetchPost (id) {
-      this.selectedPost = null;
+      this.post = null;
       this.loading = true;
       try {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`);
-        this.selectedPost = response.data;
+        this.post = response.data;
 
       }
       catch (error) {
@@ -51,36 +50,35 @@ export const usePostStore = defineStore({
         this.error = error;
       }
     },
-    async updatePost (postData) {
+    async patchPost(id, postData) {
       try {
-        const response = await axios.put(`https://jsonplaceholder.typicode.com/posts/${postData.id}`, postData);
+        const response = await axios.patch(`https://jsonplaceholder.typicode.com/posts/${id}`, postData);
         const updatedPost = response.data;
-
-        this.posts = this.posts.map(post => post.id === updatedPost.id ? updatedPost : post);
-      }
-      catch (error) {
-        this.error = error;
-      }
-    },
-    async patchPost (postId, updatedFields) {
-      try {
-        const response = await axios.patch(`https://jsonplaceholder.typicode.com/posts/${postId}`, updatedFields);
-        const updatedPost = response.data;
-
+    
         const index = this.posts.findIndex(post => post.id === updatedPost.id);
-        if (index !== -1) {
-          this.posts[index] = updatedPost;
-        }
+        this.posts[index] = updatedPost;
       }
       catch (error) {
-        this.error = error;
+        if (error.response) {
+          const { data, status, headers } = error.response;
+          console.log(data);
+          console.log(status);
+          console.log(headers);
+        }
+        else if (error.request) {
+          console.log(error.request);
+        }
+        else {
+          console.log('Error:', error.message);
+        }
+        console.log(error.config);
       }
     },
-    async deletePost (postId) {
+    async deletePost (id) {
       try {
-        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
 
-        this.posts = this.posts.filter(post => post.id !== postId);
+        this.posts = this.posts.filter(post => post.id !== id);
       }
       catch (error) {
         this.error = error;

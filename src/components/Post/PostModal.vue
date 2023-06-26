@@ -1,7 +1,7 @@
 <script setup>
 defineProps(['posts', 'loading', 'error', 'buttonText', 'modalTitle']);
+defineEmits(['close', 'select-post', 'delete-post']);
 
-defineEmits('select-post');
 </script>
 
 <template>
@@ -19,7 +19,6 @@ defineEmits('select-post');
     <div
       class="modal fade"
       id="postsModal"
-      tabindex="-2"
       aria-labelledby="postsModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -58,24 +57,32 @@ defineEmits('select-post');
             </p>
             <table class="table">
               <thead>
-                <tr>
-                  <th
+                <tr v-if="posts && posts.length > 0">
+                  <th 
                     v-for="field in Object.keys(posts[0])"
                     :key="field"
                     @click="sortTable(field)">
                     {{ field }} 
+                  </th>
+                  <th colspan="2">
+                    Actions
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr
                   v-for="post in posts"
-                  :key="post.id"
-                  @click="$emit('select-post', post.id)">
+                  :key="post.id">
                   <td>{{ post.userId }}</td>
                   <td>{{ post.id }}</td>
                   <td>{{ post.title }}</td>
                   <td>{{ post.body }}</td>
+                  <td @click="$emit('select-post', post.id)">
+                    <i class="bi bi-pencil-square" />
+                  </td>
+                  <td @click="$emit('delete-post', post.id)">
+                    <i class="bi bi-trash" />
+                  </td>
                 </tr>
               </tbody>
             </table>
