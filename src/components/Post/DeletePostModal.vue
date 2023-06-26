@@ -13,7 +13,7 @@ defineEmits(['close', 'delete-confirmed']);
 
 const postStore = usePostStore();
 
-const { post } = storeToRefs(postStore);
+const { post, loading, error } = storeToRefs(usePostStore());
 
 async function handleDelete(event) {
   event.preventDefault();
@@ -35,8 +35,18 @@ async function handleDelete(event) {
       class="modal custom-fade">
       <div class="modal__wrapper">
         <div class="modal__container">
-          <template v-if="post">
-            <section>
+          <template v-if="post"> 
+            <section v-if="error">
+              {{ error }}
+            </section>
+            <section v-if="loading">
+              <div
+                class="spinner-border"
+                role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </section>
+            <section v-else>
               <p>Confirm deletion of post <strong>{{ post.title }}</strong>?</p>
               <form @submit.prevent="handleDelete" />
             </section>

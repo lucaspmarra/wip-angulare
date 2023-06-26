@@ -1,6 +1,6 @@
 <script setup>
 defineProps(['posts', 'loading', 'error', 'buttonText', 'modalTitle']);
-defineEmits(['close', 'select-post', 'delete-post']);
+defineEmits(['close', 'create-post', 'select-post', 'delete-post']);
 
 </script>
 
@@ -33,18 +33,19 @@ defineEmits(['close', 'select-post', 'delete-post']);
               class="btn-group"
               role="group">
               <button
+                @click="$emit('create-post')"
                 type="button"
                 class="btn btn-outline-primary"
                 data-bs-dismiss="modal"
                 aria-label="Add">
-                +
+                <i class="bi bi-file-earmark-plus" />
               </button>
               <button
                 type="button"
                 class="btn btn-outline-primary"
                 data-bs-dismiss="modal"
                 aria-label="Close">
-                X
+                <i class="bi bi-x-lg" />
               </button>
             </div>
           </div>
@@ -60,8 +61,7 @@ defineEmits(['close', 'select-post', 'delete-post']);
                 <tr v-if="posts && posts.length > 0">
                   <th 
                     v-for="field in Object.keys(posts[0])"
-                    :key="field"
-                    @click="sortTable(field)">
+                    :key="field">
                     {{ field }} 
                   </th>
                   <th colspan="2">
