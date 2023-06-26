@@ -22,7 +22,7 @@ defineEmits('select-post');
       tabindex="-2"
       aria-labelledby="postsModalLabel"
       aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h1
@@ -56,20 +56,29 @@ defineEmits('select-post');
             <p v-if="loading">
               Loading posts...
             </p>
-            <div
-              v-for="post in posts"
-              :key="post.id">
-              <span
-                class="modal__custom"
-                @click="$emit('select-post', post.id)">
-                <h4 class="modal__custom__title">
-                  {{ post.title }}
-                </h4>
-                <p class="modal__custom__content">{{ post.body }}</p>
-                <p>user id: {{ post.userId }}</p>
-                <hr>
-              </span>
-            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th
+                    v-for="field in Object.keys(posts[0])"
+                    :key="field"
+                    @click="sortTable(field)">
+                    {{ field }} 
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="post in posts"
+                  :key="post.id"
+                  @click="$emit('select-post', post.id)">
+                  <td>{{ post.userId }}</td>
+                  <td>{{ post.id }}</td>
+                  <td>{{ post.title }}</td>
+                  <td>{{ post.body }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="modal-footer">
