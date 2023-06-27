@@ -1,8 +1,9 @@
 <script setup>
-import { reactive, useStore } from 'vue';
+import { reactive } from 'vue';
 import { useRegisterStore } from '@/stores/register.js';
 
 defineProps(['buttonTitle', 'modalTitle']);
+
 
 const state = reactive({
   name: '',
@@ -13,10 +14,10 @@ const state = reactive({
   shirt: ''
 });
 
-function handleRegister(event) {
-  event.preventDefault();
+const store = useRegisterStore();
 
-  const data = {
+const handleRegister = () => {
+  const userData = {
     name: state.name,
     email: state.email,
     dob: state.dob,
@@ -24,9 +25,7 @@ function handleRegister(event) {
     gender: state.gender,
     shirt: state.shirt
   };
-
-  const registerStore = useStore(useRegisterStore);
-  registerStore.saveUserData(data);
+  store.registerUser(userData);
 
   state.name = '';
   state.email = '';
@@ -34,7 +33,7 @@ function handleRegister(event) {
   state.phone = '';
   state.gender = '';
   state.shirt = '';
-}
+};
 </script>
 
 
