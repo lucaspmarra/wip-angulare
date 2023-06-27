@@ -50,7 +50,7 @@ jobs:
         with:
           node-version: '16.18.0'
       - run: yarn
-      - run: yarn generate
+      - run: yarn build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
