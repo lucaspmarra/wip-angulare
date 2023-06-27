@@ -42,7 +42,7 @@ const handleRegister = () => {
   <!-- Button trigger modal -->
   <button
     type="button"
-    class="btn btn-primary"
+    class="btn btn-primary modal__button btn-lg"
     data-bs-toggle="modal"
     data-bs-target="#registerModal">
     {{ buttonTitle }}
@@ -190,5 +190,9 @@ const handleRegister = () => {
 </template>
 
 <style lang="scss" scoped>
-
+.modal__button {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
 </style>

@@ -6,8 +6,14 @@ import RegisterComponent from '../components/Register/RegisterComponent.vue';
 </script>
 
 <template>
-  <main>
-    <PostComponent />
-    <RegisterComponent />
+  <main class="container text-center">
+    <article class="row">
+      <section class="col">
+        <PostComponent />
+      </section>
+      <section class="col">
+        <RegisterComponent />
+      </section>
+    </article>
   </main>
 </template>

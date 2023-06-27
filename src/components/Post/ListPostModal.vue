@@ -9,7 +9,7 @@ defineEmits(['close', 'create-post', 'select-post', 'delete-post']);
     <!-- Button trigger modal -->
     <button
       type="button"
-      class="btn btn-primary modal__button"
+      class="btn btn-primary modal__button btn-lg"
       data-bs-toggle="modal"
       data-bs-target="#postsModal">
       {{ buttonText }}
