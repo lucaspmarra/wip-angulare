@@ -1,35 +1,52 @@
-# wip-angulare
 
-This template should help get you started developing with Vue 3 in Vite.
+# Wip Angulare
 
-## Recommended IDE Setup
+Project performed for testing @ Angular e-Commerce and Digital Payments.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+The project was started with Vite and Pinia (Evolution of VueX).
 
-## Customize configuration
+<br>
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Register Component
 
-## Project Setup
+[✔] Register modal is working and saving data into LocalStorage  
+[] New modal to show LocalStorage data is not yet implemented  
+[] Buttons to Edit and Delete is not yer implemented
 
-```sh
-yarn
+<br>
+
+## Post Component
+
+[✔] Implementation of a Store in Pinia to support all http requests  
+[✔] Post modal is showing all posts in table (axios.get)
+[✔] Edit button is working, showing the selected post (axios.get)  
+[🐞] Edit post form/input is not working  
+[✔] Update post request is working (axios.patch)
+[✔] Delete post request is working (axios.delete)
+[✔] Confirm delete modal is working
+
+## Running locally
+
+Clone the repo
+
+```bash
+  git clone https://github.com/lucaspmarra/wip-angulare.git
 ```
 
-### Compile and Hot-Reload for Development
+Enter the project directory
 
-```sh
-yarn dev
+```bash
+  cd wip-angulare
 ```
 
-### Compile and Minify for Production
+Install the dependencies
 
-```sh
-yarn build
+```bash
+  yarn
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Start the dev server
 
-```sh
-yarn lint
+```bash
+  yarn dev
 ```
